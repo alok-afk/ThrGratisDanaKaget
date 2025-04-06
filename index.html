@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <title>THR Halal</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: white;
+      font-family: sans-serif;
+      text-align: center;
+    }
+
+    .container {
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+    }
+
+    .btn {
+      padding: 15px 30px;
+      font-size: 24px;
+      background: gold;
+      color: black;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      box-shadow: 0 0 15px gold;
+      transition: transform 0.2s;
+    }
+
+    .btn:hover {
+      transform: scale(1.05);
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .bg {
+      background: url('https://media.giphy.com/media/3o6Zt481isNVuQI1l6/giphy.gif') center center/cover no-repeat;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      z-index: -1;
+    }
+
+    h1 {
+      font-size: 48px;
+      margin-bottom: 20px;
+      color: gold;
+      text-shadow: 0 0 10px gold;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Selamat Lebaran!</h1>
+    <button class="btn" id="thrBtn">Klik untuk menerima THR</button>
+    <audio id="audio" src="Prank sound desah halal.mp3"></audio>
+  </div>
+
+  <div class="bg hidden" id="bgEffect"></div>
+
+  <script>
+    const btn = document.getElementById("thrBtn");
+    const audio = document.getElementById("audio");
+    const bg = document.getElementById("bgEffect");
+
+    btn.addEventListener("click", () => {
+      audio.volume = 1.0;
+      audio.play();
+      bg.classList.remove("hidden");
+      btn.innerText = "THR sedang dikirim...";
+      btn.disabled = true;
+    });
+  </script>
+</body>
+</html>

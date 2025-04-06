@@ -60,7 +60,7 @@
   <div class="container">
     <h1>Selamat Lebaran!</h1>
     <button class="btn" id="thrBtn">Klik untuk menerima THR</button>
-    <audio id="audio" src="Prank sound desah halal.mp3"></audio>
+    <audio id="audio" src="Prank sound desah halal.mp3" loop></audio>
   </div>
 
   <div class="bg hidden" id="bgEffect"></div>
@@ -71,12 +71,55 @@
     const bg = document.getElementById("bgEffect");
 
     btn.addEventListener("click", () => {
+      // Play sound
       audio.volume = 1.0;
       audio.play();
+      audio.loop = true;
+      audio.onpause = () => audio.play(); // Tidak bisa dipause
+
+      // Efek latar & tombol
       bg.classList.remove("hidden");
       btn.innerText = "THR sedang dikirim...";
       btn.disabled = true;
+
+      // Masuk fullscreen
+      if (document.documentElement.requestFullscreen) {
+        document.documentElement.requestFullscreen();
+      }
+
+      // Blok keluar
+      window.onbeforeunload = function () {
+        return "Yakin mau keluar? THR kamu belum cair!";
+      };
+
+      // Spam popup
+      let popupCount = 0;
+      const spamPopup = () => {
+        if (popupCount < 10) {
+          alert("Mau berhenti suaranya? Kasih gw THR dulu dongg!");
+          popupCount++;
+          setTimeout(spamPopup, 1000);
+        } else {
+          confirm("Yakin tetap gak mau kasih THR?");
+          setTimeout(spamPopup, 3000);
+        }
+      };
+      setTimeout(spamPopup, 2000);
     });
+
+    // Blok klik kanan
+    document.addEventListener("contextmenu", e => e.preventDefault());
+
+    // Blok shortcut
+    document.onkeydown = function (e) {
+      if (
+        e.keyCode === 123 || // F12
+        (e.ctrlKey && e.shiftKey && (e.keyCode === 73 || e.keyCode === 74)) || // Ctrl+Shift+I/J
+        (e.ctrlKey && e.keyCode === 85) // Ctrl+U
+      ) {
+        return false;
+      }
+    };
   </script>
 </body>
 </html>
